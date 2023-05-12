@@ -1,7 +1,7 @@
 {% extends "base.jinja" %}
 {% block content %}
-<h1>Sign Up For Free Today</h1>
-    <div class = "content-section">
+    <h1>Sign Up For Free Today</h1>
+    
         <form action="" method="POST">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
@@ -20,13 +20,7 @@
                 {{form.password.label(class="form-control-label")}}
                 {{form.password(class="form-control form-control-lg")}}
             </div>
-            <div class="form-group">
-                {{form.confirm_password.label(class="form-control-label")}}
-                {% for error in form.password.errors %}
-                <span style="color: red;">{{error}}</span>
-                {% endfor %}
-                {{form.confirm_password(class="form-control form-control-lg")}}
-            </div>
+
             </fieldset>
             <div class="form-group">
                 {{form.submit(class="btn btn-outline-info")}}
