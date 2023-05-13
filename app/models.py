@@ -15,6 +15,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)  
     posts = db.relationship('Post', backref='author', lazy=True)
+    cars = db.relationship('AddCar', backref='owner', lazy=True)
       
     def __repr__(self):
         return f'User: {self.username}'
@@ -47,4 +48,18 @@ class Post(db.Model):
         db.session.add(self)
         db.session.commit()
         
-        
+class AddCar(db.Model):   
+    id= db.Column(db.Integer, primary_key=True)
+    make= db.Column(db.String(20), nullable=False)
+    model = db.Column(db.String(20), nullable=False)
+    year = db.Column(db.String(4), nullable=False)
+    info = db.Column(db.String(250))
+    user_id= db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    
+    def __repr__(self):
+        return f'<AddCar: {self.make} {self.model} {self.year}'
+    
+    def commit(self):
+        db.session.add(self)
+        db.session.commit()
+  

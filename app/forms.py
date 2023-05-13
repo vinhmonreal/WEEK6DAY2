@@ -22,3 +22,11 @@ class PostForm(FlaskForm):
 class CommentForm(FlaskForm):
     body = StringField("Input car's information you like to add to my collection", validators=[DataRequired()])
     submit = SubmitField('Publish')
+    
+    
+class AddCarForm(FlaskForm):
+    make = StringField('Make', validators=[DataRequired(), Length(min=2, max=20)])
+    model = StringField('Model', validators=[DataRequired(), Length(min=2, max=20)])
+    year = StringField('Year', validators=[DataRequired(), Length(min=4, max=4)])
+    info = StringField('Info', validators=[DataRequired(), Length(max=250)])
+    submit = SubmitField('Add Car')

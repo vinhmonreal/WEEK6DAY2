@@ -1,0 +1,19 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+
+<h3>{{ user.username }}'s Page</h3>
+<h1>My Posts</h1>
+{% for post in user.posts %}
+  <p>{{ post.body }}</p>  <small>{{ post.timestamp }}</small>
+{% endfor %}
+
+<h1>My Car Collection</h1>
+{% for add_car in user.cars %}
+  <ol>
+  <p>Make: {{ add_car.make }}, Model: {{add_car.model}}, Year: {{add_car.year}}</p>
+  </ol>
+  
+{% endfor %}
+
+{% endblock %}

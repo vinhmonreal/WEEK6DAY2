@@ -8,6 +8,8 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 @bp.route('/register', methods=['GET','POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     form = RegisterForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -25,8 +27,12 @@ def register():
     print('failed registration')
     return render_template('register.jinja', form=form)
 
+    
+
 @bp.route('/signin', methods=['GET','POST'])
 def signin():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     form = SigninForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -41,3 +47,9 @@ def signin():
             flash('user doesn\'t exist or incorrect password', 'danger')
     print('failed login')
     return render_template('signin.jinja', form=form)
+
+@bp.route('/signout')
+@login_required #####
+def signout():
+    logout_user()
+    return redirect(url_for('main.home'))
